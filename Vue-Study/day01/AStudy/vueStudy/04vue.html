@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        li{
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- es5用in,es6用of -->
+        <ul>
+            <li v-for="(item,index) of list">
+                name:{{item}}--------索引:{{index}}
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="(item,key,index) of obj">
+                key:{{key}}------val:{{item}}---------索引{{index}}
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="(item,index) of str">
+                name:{{item}}--------索引:{{index}}
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="(item,index) of num">
+                name:{{item}}--------索引:{{index}}
+            </li>
+        </ul>
+
+
+    </div>
+    <script>
+        new Vue({
+            el:".app",
+            data:{
+                list:['张三','李四','王五','刘七'],
+                obj:{
+                    id:1,
+                    name:'信爷',
+                    des:'世界上最帅的男人',
+                    price:'88888888888'
+                },
+                str:'我好帅,我也很无奈',
+                num:10
+            }
+        })
+    
+    
+    </script>
+</body>
+</html>

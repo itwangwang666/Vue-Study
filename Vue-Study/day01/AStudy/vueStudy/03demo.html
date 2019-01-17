@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+        .red{
+            color: red;
+        }
+        .bgc{
+            background-color: blue;
+        }
+        .fontSize{
+            font-size: 50px;
+        }
+        .bd{
+            border: 3px solid orange;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h2 :class="['red','bgc',flag?'fontSize':'bd']">牛逼牛逼了</h2>
+        <button @click="btn">按钮</button>
+    </div>
+    <script>
+        let vm = new Vue({
+            el:"#app",
+            data:{
+                flag:true
+            },
+            methods:{
+                btn(){
+                    this.flag = !this.flag
+                }
+            }
+        })
+    
+    </script>
+</body>
+</html>

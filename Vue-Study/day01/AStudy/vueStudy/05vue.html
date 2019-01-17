@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+        h1{
+            background-color: red;
+            color: white;
+            width: 470px;
+            height: 50px;
+            line-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>{{str}}</h1>
+        <button @click="start">点击我,让文字跑起来</button>
+        <button @click="moving">点击我,设置定时器让文字跑起来</button>
+        <button @click="stop">点击可以停下来</button>
+
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                str:'我是Vue小白,准备进阶大佬,哈哈',
+                timerId:''
+            },
+            methods:{
+                //点击让文字跑起来
+                start(){
+                    let start = this.str.substring(0,1);
+                    let end = this.str.substring(1);
+                    this.str = end+start
+                },
+                moving(){
+                    // if(this.timerId !==null) return
+                    this.timerId = setInterval(() => {
+                        let start = this.str.substring(0, 1);
+                        let end = this.str.substring(1);
+                        this.str = end + start
+                    }, 200);
+                },
+                moving2() {
+                    let This = this
+                    setInterval(function(){
+                        let start = This.str.substring(0, 1);
+                        let end = This.str.substring(1);
+                        This.str = end + start
+                    }, 100);
+                },
+                stop(){
+                    // console.log(this);
+                    clearInterval(this.timerId)
+                    this.timerId = null,
+                    this.str = '我是Vue小白,准备进阶大佬,哈哈'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

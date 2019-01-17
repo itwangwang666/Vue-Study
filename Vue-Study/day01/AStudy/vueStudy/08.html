@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+        .bg{
+            background-color: rgb(143, 143, 143);
+        }
+        .color{
+            color:white;
+        }
+        .fs{
+            font-size: 50px;
+        }
+        .bd{
+            border:3px solid green;
+        }
+        ul{
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h3>{{msg}}</h3>
+        <h4 v-text="msg"></h4>
+        <div v-html="msg1"></div>
+        <h1 :title="msg2">大标题</h1>
+
+        <div :class="['bg','color',flag?'fs':'bd']">测试测试</div>
+
+        <div v-show="flag">嘘嘘嘘</div>
+        <button @click="isShow">点击</button>
+
+        <ul>
+            <li v-for="(item,index) of list">
+                {{index+1}}------{{item}}
+            </li>
+        </ul>
+
+        <button @click="start">点击</button>
+        <button @click="stop">停止</button>
+        <div>{{msg3}}</div>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                msg:'哈哈',
+                msg1:'<h1>呵呵</h1>',
+                msg2:'这是一个标题',
+                msg3:'12岁初中遇见了你，一见倾心。 13岁我说喜欢你，你说我们年龄还小。 15岁互有好感，可惜毕业失联。 光阴似箭，日月如梭。 23岁我们终于在一起，绕了一大圈回到原点。 十几岁的感情，并不都代表着幼稚和叛逆， 而是过早的幸运遇到了对的人。 还有23天，你即将成为我的妻子。 余生相依为命，请多多指教。',
+                flag:true,
+                list:['刘德华','张学友','郭富城','黎明'],
+                timerId:''
+            },
+            methods:{
+                isShow(){
+                    this.flag = !this.flag
+                },
+                start(){
+                    this.timerId = setInterval(() => {
+                        let start = this.msg3.substr(0,1)
+                        let end = this.msg3.substr(1)
+                        this.msg3 = end + start
+
+                    }, 200);
+                },
+                stop(){
+                    clearInterval(this.timerId)
+                    this.timerId = null
+                }
+            }
+        })
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            margin:0 auto;
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- text  password  address 可以用v-model  双向数据绑定 -->
+        <input type="text" v-model="msg">
+        <button @click="addData">点击我,把input的值放到数组里面去</button>
+        <ul>
+            <li v-for="(item,index) of list">
+                {{item}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'我是正牌的双向数据绑定',
+                list:['张三','李四','王五','赵六']
+            },
+            methods:{
+                addData(){
+                    this.list.push(this.msg)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
