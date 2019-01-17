@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style lang="">
+        .box {
+            background-color: orange;
+            width: 200px;
+            height: 200px;
+        }
+
+        .box2 {
+            background-color: blue;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- .stop可以阻止事件冒泡 -->
+        <!-- <div class="box" @click="out">
+            <button @click.stop="btn">按钮</button>
+        </div> -->
+
+        <!-- .prevent可以阻止事件默认行为 -->
+        <!-- <a href="http://www.baidu.com" @click.prevent="baidu">百度一下,你就知道</a> -->
+
+        <!-- .capture 添加事件监听时使用事件捕获 -->
+            <div class="box" @click="out">
+                <div class="box2" @click.capture="middle">
+                    <button @click="btn">按钮</button>
+                </div>
+            </div>
+        <!-- .self实现只有点击当前元素时,才会触发处理函数 -->
+        <!-- 只有点击当前元素时,才会触发该元素身上的处理函数,事件冒泡和时间捕获不会触发到 -->
+        <!-- <div class="box" @click.self="out">
+            <div class="box2" @click="middle">
+                <button @click="btn">按钮</button>
+            </div>
+        </div> -->
+
+        <!-- .once只触发一次事件处理函数 -->
+        <!-- <a href="http://www.baidu.com" @click.prevent.once="baidu">百度一下,你就知道</a> -->
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods: {
+                out() {
+                    console.log('外面的div盒子')
+                },
+                btn() {
+                    console.log('里面的按钮');
+                },
+                baidu() {
+                    console.log('百度');
+                },
+                middle() {
+                    console.log('中间的盒子');
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
