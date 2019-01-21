@@ -14,24 +14,24 @@
 
 <body>
     <div id="app">
-        
+
         <div class="panel panel-primary">
-              <div class="panel-heading">
-                    <h3 class="panel-title">添加品牌</h3>
-              </div>
-              <div class="panel-body form-inline">
-                    <label for="">
-                        汽车品牌:
-                        
-                        <input type="text" id="name" class="form-control" v-model="name">
-                        
-                    </label>
-                    
-                    <button type="button" class="btnbtn-primary" @click="add">添加</button>
-                    
-              </div>
+            <div class="panel-heading">
+                <h3 class="panel-title">添加品牌</h3>
+            </div>
+            <div class="panel-body form-inline">
+                <label for="">
+                    汽车品牌:
+
+                    <input type="text" id="name" class="form-control" v-model="name" @click.enter="add">
+
+                </label>
+
+                <button type="button" class="btnbtn-primary" @click="add">添加</button>
+
+            </div>
         </div>
-        
+
         <table class="table table-bordered table-hover table-striped">
             <thead>
                 <tr>
@@ -47,46 +47,59 @@
                     <td>{{item.name}}</td>
                     <td>{{item.ctime | ctimeFormat}}</td>
                     <td>
-                        <a href="">删除</a>
+                        <a href="" @click.prevent="del(item.id)">删除</a>
                     </td>
                 </tr>
             </tbody>
         </table>
-        
+
     </div>
     <script>
+        // 如果我们通过全局配置了，请求的数据接口 根域名，则在每次单独发起 http 请求的时候，请求的 url 路径，应该以相对路径开头，前面不能带 / ,否则 不会启用根路径做拼接
+        Vue.http.options.root = 'http://vue.lovegf.cn:8899/'
+        // 全局启用 emulateJSON 选项
+        Vue.http.options.emulateJSON = true
+
         new Vue({
             el: '#app',
             data: {
-                name:'',
+                name: '',
                 list: [
                     // { id: 1, name: '玛莎拉蒂', ctime: new Date() },
                     // { id: 2, name: '特斯拉', ctime: new Date() }
                 ]
             },
             methods: {
-                getAllData(){
-                    this.$http.get('http://vue.lovegf.cn:8899/api/getprodlist').then(result=>{
+                getAllData() {
+                    this.$http.get('api/getprodlist').then(result => {
                         // console.log(result.body)
-                        if(result.body.status == 0){
+                        if (result.body.status == 0) {
                             this.list = result.body.message
                         }
                     })
                 },
-                add(){
-                    this.$http.post('http://vue.lovegf.cn:8899/api/addproduct',{name:this.name},{
+                add() {
+                    this.$http.post('api/addproduct', { name: this.name }, {
                         emulateJSON: true
-                    }).then(result=>{
+                    }).then(result => {
                         // console.log(result.body)
                         if (result.body.status == 0) {
                             this.getAllData()
                             this.name = ''
                         }
                     })
+                },
+                del(id) {
+                    this.$http.get('api/delproduct/' + id)
+                        .then(result => {
+                            if (result.body.status == 0) {
+                                this.getAllData()
+                            }
+                        })
                 }
             },
-            filters:{
-                ctimeFormat:(data)=>{
+            filters: {
+                ctimeFormat: (data) => {
                     return moment().format('YYYY-MM-DD HH:mm:ss')
                 }
             },
