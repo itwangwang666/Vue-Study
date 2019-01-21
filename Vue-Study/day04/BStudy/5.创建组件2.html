@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <com></com>
+        <com1></com1>
+    </div>
+    <!-- 使用template元素在外部定义组件的html结构模板 -->
+    <template id="tmp1">
+        <div>
+            <h1>这是一个h1</h1>
+            <h2>这是用template元素,在外部定义的组件结构,这个方式,有代码的智能提示和高亮</h2>
+        </div>
+    </template>
+
+    <template id="tmp2">
+        <div>
+            <h1>好用吗</h1>
+        </div>
+    </template>
+    
+    <script>
+        //注册组件
+        Vue.component('com', {
+                template: '#tmp1'
+            })
+        new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods: {
+
+            },
+            components:{
+                'com1':{
+                    template:'#tmp2'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

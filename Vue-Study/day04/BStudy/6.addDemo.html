@@ -9,12 +9,13 @@
     <script src="./lib/vue-2.4.0.js"></script>
     <style>
         li{
-            border:1px dashed #999;
-            margin:5px;
-            list-style: none;
-            line-height: 35px;
-            padding-left: 5px;
+            border:1px solid #666;
+            height: 50px;
             width: 100%;
+            line-height: 50px;
+            margin:30px;
+            list-style: none;
+            padding-left:20px;
         }
         li:hover{
             background-color: #ccc;
@@ -23,15 +24,15 @@
         .v-enter,
         .v-leave-to{
             opacity: 0;
-            transform: translateY(200px);
+            transform: translateY(300px);
         }
         .v-enter-active,
         .v-leave-active{
-            transition: all 0.9s ease;
+            transition: all 0.7s ease;
         }
-        /* .v-move,.v-leave-active配合使用,可以实现列表下面的元素渐渐飘上来的效果 */
+        
         .v-move{
-            transition: all 0.9s ease;
+            transition: all 0.7s ease;
         }
         .v-leave-active{
             position: absolute;
@@ -45,20 +46,22 @@
             ID:
             <input type="text" v-model="id">
         </label>
+
         <label>
-            name:
+            Name:
             <input type="text" v-model="name" @keyup.enter="add">
         </label>
+
         <button @click="add">添加</button>
+
         <!-- <ul> -->
-            <!-- 当有多个元素时,应用transition-group包住,vue提供的
-                 tag属性可以指定 transition-group 渲染为指定的标签,默认是span
-                 appear 可以让页面刚加载时也有动画效果-->
             <transition-group tag="ul" appear>
-                <li v-for="(item,index) in list" :key="item.id" @click="del(index)">{{item.id}}---{{item.name}}</li>
+                <li v-for="(item,index) in list" :key="item.id" @click="del(index)">{{item.id}} --- {{item.name}}</li>
             </transition-group>
-           
+                
+            
         <!-- </ul> -->
+
     </div>
     <script>
         new Vue({
@@ -68,21 +71,23 @@
                 name:'',
                 list: [
                     { id: 1, name: '赵高' },
-                    { id: 2, name: '嫪毐' },
-                    { id: 3, name: '嬴政' },
-                    { id: 4, name: '吕不韦' }
+                    { id: 2, name: '嬴政' },
+                    { id: 3, name: '项羽' },
+                    { id: 4, name: '刘邦' },
+                    { id: 5, name: '嫪毐' }
                 ]
             },
             methods: {
                 add(){
                     this.list.push({id:this.id,name:this.name})
-                    this.id = this.name = ''
+                    this.id = this.name = ""
                 },
                 del(index){
                     this.list.splice(index,1)
                 }
             },
         })
+
     </script>
 </body>
 
