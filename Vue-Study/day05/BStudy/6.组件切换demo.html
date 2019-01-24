@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>这是接收的数据========={{getsondata}}</p>
+        <a href="" @click.prevent="flag=true">登录</a>
+        <a href="" @click.prevent="flag=false">注册</a>
+
+        <login v-if="flag" @foo="gotit"></login>
+        <register v-else></register>
+    </div>
+
+    <template id="login">
+        <div>
+            <h1>登录页面</h1>
+            <label>
+                用户名:
+                <input type="text" v-model="username">
+            </label>
+            <button @click="postdata">发送数据</button>
+        </div>
+        
+
+    </template>
+
+    <template id="register">
+        <h2>注册页面</h2>
+    </template>
+    <script>
+        Vue.component('login', {
+            template: '#login',
+            data:function(){
+                return {
+                    username:''
+                }
+            },
+            methods: {
+                 postdata(){
+                     this.$emit('foo',this.username)
+                 }
+            },
+        })
+
+        Vue.component('register', {
+            template: '#register',
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                flag: false,
+                getsondata:''
+            },
+            methods: {
+                gotit(data) {
+                    // console.log('调用了父组件的放阿飞')
+                    this.getsondata = data
+                }
+            },
+        })
+    </script>
+
+</html>

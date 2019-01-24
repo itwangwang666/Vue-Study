@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <counter></counter>
+        <hr>
+        <counter></counter>
+        <hr>
+        <counter></counter>
+        <hr>
+        <counter></counter>
+        <hr>
+    </div>
+
+    <template id="tmp">
+        <div>
+            <button @click="add">点我+1</button>
+            <h3>{{count}}</h3>
+        </div>
+    </template>
+    <script>
+        var obj = { count: 0 }
+        Vue.component('counter', {
+            template: '#tmp',
+            //组件的data必须是一个方法
+            data() {         //保证每个组件内部的data都是独立的
+                // return obj
+                return {
+                    count: 0
+                }
+            },
+            methods: {
+                add() {
+                    this.count++
+                }
+            },
+        })
+        new Vue({
+            el: '#app',
+            data: {},
+            methods: {}
+        })
+    </script>
+</body>
+
+</html>

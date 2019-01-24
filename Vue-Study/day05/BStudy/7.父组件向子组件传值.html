@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 父组件向子组件传值,通过属性绑定(v-bind)的形式,把需要传递给子组件的数据,以属性绑定的形式,传递到子组件内部,供子组件使用 -->
+        <!-- 绑定属性时不能使用驼峰命名,需要用短横线隔开,在下面获取时可以使用驼峰命名 -->
+        <com v-bind:parent-msg="msg"></com>
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '这是父组件中的数据'
+            },
+            components: {
+                com: {
+                    template: '<h1 @click="change">这是子组件======{{parentMsg}}</h1>',
+                    data() {
+                        return {
+                            title: '标题',
+                            content: '内容数据...'
+                        }
+                    },
+                    //组件中所有的props中的数据,都是父组件传递给子组件的
+                    //props中的数据都是只读的,无法重新赋值
+                    //把父组件传递过来的parentMsg属性,先在props数组中定义一下,这样才能使用
+                    props: ['parentMsg'],
+                    methods: {
+                        change() {
+                            this.parentMsg = '被修改了'
+                        }
+                    },
+
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
