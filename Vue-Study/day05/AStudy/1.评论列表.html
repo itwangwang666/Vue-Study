@@ -56,7 +56,7 @@
                     var comment = { id: Date.now(), user: this.user, content: this.content }
                     //将数据存放在 localStorage 中, localStorage中只能存放字符串类型,调用JSON.stringify
                     //在保存数据之前,需要先获取localStorage中的数据,转换为数组,调用JSON.parse,再将最新评论的数据添加到数组的最前面
-                    var list = JSON.parse(localStorage.getItem("cmts" || "[]"))
+                    var list = JSON.parse(localStorage.getItem('cmts') || '[]')
                     list.unshift(comment)
                     localStorage.setItem("cmts", JSON.stringify(list))
                     this.user = this.content = ''
@@ -76,7 +76,7 @@
             },
             methods: {
                 loadcomment() {
-                    var list = JSON.parse(localStorage.getItem("cmts" || "[]"))
+                    var list = JSON.parse(localStorage.getItem('cmts') || '[]')
                     this.list = list
                 }
             },
