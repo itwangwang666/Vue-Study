@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <script src="./lib/vue-router-3.0.1.js"></script>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/login/1/ls">登录</router-link>
+        <router-link to="/register">注册</router-link>
+
+        <router-view></router-view>
+
+    </div>
+    <script>
+        //定义登录注册的组件,不需要注册
+            var login = {
+                template: '<h1>登录组件--{{$route.params.id}}--{{$route.params.name}}</h1>',
+                data(){
+                    return {
+                        msg:'呵呵'
+                    }
+                },
+                created(){
+                    // console.log(this.$route)
+                    //$route.params可以获取路由参数
+                    console.log(this.$route.params.id)
+                }
+            }
+
+            var register = {
+                template: '<h1>注册组件</h1>'
+            }
+            //创建路由,需要挂载在VM实例上
+            var router = new VueRouter({
+                routes: [
+                    { path: '/login/:id/:name', component: login },
+                    { path: '/register', component: register },
+                ],
+                //可以自定义路由切换时的类名
+                linkActiveClass: 'myactive'
+            })
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+    
+            },
+            router
+        })
+    </script>
+</body>
+</html>
