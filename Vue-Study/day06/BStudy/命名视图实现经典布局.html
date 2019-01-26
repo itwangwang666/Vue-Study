@@ -8,42 +8,65 @@
     <title>Document</title>
     <script src="./lib/vue-2.4.0.js"></script>
     <script src="./lib/vue-router-3.0.1.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .header{
+            background-color: lightgreen;
+            height: 50px;
+        }
+        .container{
+            display: flex;
+            height: 800px;
+        }
+        .left{
+            background-color: orange;
+            flex: 3;
+        }
+        .main{
+            background-color: rebeccapurple;
+            flex: 7;
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
         <router-view></router-view>
         <div class="container">
-            <router-view></router-view>
-            <router-view></router-view>
+            <router-view name="left"></router-view>
+            <router-view name="main"></router-view>
         </div>
-        
-
     </div>
     <script>
         let header = {
-            template: '<h1>头部组件</h1>'
+            template: '<h1 class="header">头部组件</h1>'
         }
 
         let left = {
-            template: '<h1>侧边栏组件</h1>'
+            template: '<h1 class="left">侧边栏组件</h1>'
         }
 
         let main = {
-            template: '<h1>主体部分组件</h1>'
+            template: '<h1 class="main">主体部分组件</h1>'
         }
         const router = new VueRouter({
-            route:[
-                {path:'/',components: header},
-                { path: '/left', components: left },
-                {path:'/main',components: main},
+            routes:[
+                // {path:'/',component: header},
+                // { path: '/left', component: left },
+                // {path:'/main',component: main},
+                {path:'/',components:{
+                    default: header,
+                    left:left,
+                    main:main
+                }}
             ]
         })
         let vm = new Vue({
             el: '#app',
-            data: {
-
-            }, 
+            data: {}, 
             router
         })
     </script>

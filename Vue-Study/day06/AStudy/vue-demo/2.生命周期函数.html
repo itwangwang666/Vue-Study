@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            template:"<p>{{this.msg}}</p>",
+            data: {
+                msg:'hello world',
+                msg1:'我需要改变'
+            },
+            beforeCreate() {
+                console.log('beforeCreate')
+            },
+            created() {
+                console.log('created')
+                console.log(this.$el)
+            },
+            beforeMount() {
+              console.log('beforeMount')
+              console.log(this.$el)
+            },
+            mounted() {
+                console.log('mounted')
+                console.log(this.$el)
+                // this.msg = this.msg1
+                //改变data里面的数据,就会触发beforeUpdate,update这两个函数
+            },
+            beforeUpdate() {
+                console.log('beforeUpdate')
+            },
+            updated() {
+                console.log('updated');
+            },
+            beforeDestroy() {
+                console.log('beforeDestroy')
+            },
+            destroyed() {
+                console.log('destroy')
+            },
+            //当vm.$destroy() 这个函数被执行的时候,就会触发 beforeDestroy destroyed这两个函数
+        })
+    </script>
+</body>
+</html>
