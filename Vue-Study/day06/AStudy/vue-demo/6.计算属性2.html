@@ -24,15 +24,15 @@
             methods: {},
             computed: {
                 full: {
-                   get(){
-                       return this.first + this.last
-                   },
-                   set(val){
+                    get() {
+                        return this.first + this.last
+                    },
+                    set(val) {
                         var arr = val.split('')
                         console.log(val)
                         this.first = arr[0]
                         this.last = arr[1]
-                   }
+                    }
                 }
             }
         })
